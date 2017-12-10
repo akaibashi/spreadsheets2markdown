@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Convert SpreadSheets2Markdown</title>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
+<link rel="stylesheet" href="/static/css/style.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script>
+window.onload = function() {
+    var convert_str = "{{ data.convert_str_esc }}";
+    if(convert_str){
+        var md = marked(convert_str);
+        var previewTA = document.querySelector('#preview');
+        previewTA.innerHTML = md;
+    }
+};
+</script>
+</head>
+<body>
+    <h1 class="h1head">SpreadSheets2Markdown</h1>
+
+    <div class="input_area">
+        <form action="/convert" method="POST">
+            <ul>
+                <li>
+                    <textarea name="str" onclick="this.select(0,this.value.length)">{{ data.origin_str }}</textarea>
+                </li>
+                <li>
+                    <input type="submit" class="btn btn-lg btn-default" value="Convert!">
+                </li>
+        </form>
+    </div>
+
+    <hr>
+
+    <div class="convert_area">
+        <h2 class="h2head">Markdown</h2>
+        <textarea onclick="this.select(0,this.value.length)">{{ data.convert_str }}</textarea>
+    </div>
+
+    <div class="convert_area">
+        <h2 class="h2head">Preview</h2>
+        <div id='preview'></div>
+    </div>
+    
+
+</body>
